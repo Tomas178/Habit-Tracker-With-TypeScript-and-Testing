@@ -1,0 +1,25 @@
+@import url('primeicons/primeicons.css');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-light: #f8faed;
+  --primary-green: #50a65c;
+  --primary-dark: #232323;
+  --primary-error: #cd0505;
+  --secondary-light: #e0dfdb;
+}
+
+[data-mode='dark'] {
+  --primary-light: #232323;
+  --primary-green: #50a65c;
+  --primary-dark: #f8faed;
+  --primary-error: #c00202;
+  --secondary-light: #444;
+}
+
+body {
+  @apply bg-primary-light font-founders;
+}
