@@ -27,6 +27,10 @@ App is mainly focused for mobile users. Also responsive for tablets and laptops.
 - Users are not allowed to edit habit name to an empty, existing or
 - When removing habit user needs to confirm or cancel his choice via popup modal
 
+## Testing
+
+- Soon to be implemented
+
 ## Starting with the project
 
 - `git clone https://github.com/TuringCollegeSubmissions/tompetro-WD2.3.1.5.git`
