@@ -96,8 +96,10 @@ select {
   }
 
   #add-habit {
-    &:hover {
-      @apply scale-110;
+    &:not(:disabled) {
+      &:hover {
+        @apply scale-110;
+      }
     }
   }
 }

@@ -35,4 +35,12 @@ const emit = defineEmits(['unpause']);
     }
   }
 }
+
+@media (screen(lg)) {
+  .unpause-button {
+    &:hover {
+      @apply scale-105;
+    }
+  }
+}
 </style>

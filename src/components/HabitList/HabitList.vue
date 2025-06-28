@@ -123,7 +123,7 @@ function getPausedDate(habitId: number) {
       </button>
     </div>
 
-    <div class="habit-list">
+    <div class="habit-list" :class="{ disabled: isFutureDate }">
       <HabitContainer
         v-for="habit in filteredHabits"
         :key="habit.id"
@@ -144,6 +144,10 @@ function getPausedDate(habitId: number) {
 <style scoped lang="scss">
 .habit-list {
   @apply mb-3 mt-2 flex flex-col-reverse gap-3;
+
+  &.disabled {
+    @apply opacity-40;
+  }
 }
 
 .paused-habits-button {
@@ -165,8 +169,10 @@ function getPausedDate(habitId: number) {
 
   .paused-habits-button {
     button {
-      &:hover {
-        @apply scale-110;
+      &:not(:disabled) {
+        &:hover {
+          @apply scale-110;
+        }
       }
     }
   }

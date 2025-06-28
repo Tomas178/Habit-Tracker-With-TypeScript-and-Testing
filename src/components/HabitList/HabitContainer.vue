@@ -26,21 +26,37 @@ defineExpose({ showPauseError });
 </script>
 
 <template>
-  <div class="habit" :class="{ done: isDone, disabled: isDisabled }">
+  <div class="habit" :class="{ done: isDone }">
     <div class="habit-name">{{ habit.name }}</div>
     <div class="buttons-error-wrapper">
       <div class="buttons-wrapper">
-        <div class="habit-button edit-button" @click="emit('edit', habit.id, habit.name)">
+        <div
+          class="habit-button edit-button"
+          @click="emit('edit', habit.id, habit.name)"
+          :class="{ disabled: isDisabled }"
+        >
           <span><i class="pi pi-pencil" style="font-size: 0.75rem"></i></span>
         </div>
-        <div class="habit-button start-stop-button" @click="emit('stop', habit.id)">
+        <div
+          class="habit-button start-stop-button"
+          @click="emit('stop', habit.id)"
+          :class="{ disabled: isDisabled }"
+        >
           <span><i class="pi pi-pause" style="font-size: 0.75rem"></i></span>
         </div>
-        <div class="habit-button toggle-button" @click="emit('toggle-done', habit.id)">
+        <div
+          class="habit-button toggle-button"
+          @click="emit('toggle-done', habit.id)"
+          :class="{ disabled: isDisabled }"
+        >
           <span v-if="isDone"><i class="pi pi-times" style="font-size: 0.75rem"></i></span>
           <span v-else><i class="pi pi-check" style="font-size: 0.75rem"></i></span>
         </div>
-        <div class="habit-button remove-button" @click="emit('remove', habit.id, habit.name)">
+        <div
+          class="habit-button remove-button"
+          @click="emit('remove', habit.id, habit.name)"
+          :class="{ disabled: isDisabled }"
+        >
           <span><i class="pi pi-ban" style="font-size: 0.75rem"></i></span>
         </div>
       </div>
@@ -69,21 +85,15 @@ defineExpose({ showPauseError });
     }
   }
 
-  &.disabled {
-    @apply cursor-not-allowed opacity-40;
-
-    .buttons-wrapper {
-      .habit-button {
-        @apply cursor-not-allowed;
-      }
-    }
-  }
-
   .buttons-wrapper {
     @apply mr-4 flex flex-row gap-4;
 
     .habit-button {
       @apply cursor-pointer place-self-center;
+
+      &.disabled {
+        @apply cursor-not-allowed;
+      }
     }
   }
 }
@@ -119,6 +129,14 @@ defineExpose({ showPauseError });
 
     .buttons-wrapper {
       @apply mr-0 w-72 justify-center rounded-3xl border-2 border-primary-dark;
+    }
+
+    .habit-button {
+      &:not(.disabled) {
+        &:hover {
+          @apply scale-105;
+        }
+      }
     }
   }
 }

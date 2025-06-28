@@ -64,7 +64,9 @@ function handleCancel() {
 
 @media (screen(lg)) {
   .action-button {
-    @apply hover:bg-primary-light hover:text-primary-dark;
+    &:hover {
+      @apply bg-primary-light text-primary-dark;
+    }
   }
 }
 </style>
