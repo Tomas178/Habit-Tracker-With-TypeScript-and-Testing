@@ -123,7 +123,7 @@ function getPausedDate(habitId: number) {
       </button>
     </div>
 
-    <div class="habit-list" :class="{ disabled: isFutureDate }">
+    <div data-testid="habit-list" class="habit-list" :class="{ disabled: isFutureDate }">
       <HabitContainer
         v-for="habit in filteredHabits"
         :key="habit.id"

@@ -14,7 +14,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div v-if="isActiveAddForm" class="page-container">
+  <div data-testid="add-habit-form" v-if="isActiveAddForm" class="page-container">
     <form @submit.prevent="habitData.addHabit(newHabitName)">
       <div id="add-form">
         <div class="form-header">

@@ -23,12 +23,12 @@ const isAnyActiveForm = computed(
 </script>
 
 <template>
-  <header :class="{ blur: isAnyActiveForm }">
+  <header data-testid="app-header-section" :class="{ blur: isAnyActiveForm }">
     <div class="wrapper">
       <GrettingHeader />
     </div>
   </header>
-  <main :class="{ blur: isAnyActiveForm }">
+  <main data-testid="app-main-section" :class="{ blur: isAnyActiveForm }">
     <FeaturesHeader />
     <DateNavigation />
     <RouterView />

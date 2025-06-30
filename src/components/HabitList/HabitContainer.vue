@@ -26,7 +26,7 @@ defineExpose({ showPauseError });
 </script>
 
 <template>
-  <div class="habit" :class="{ done: isDone }">
+  <div data-testid="habit-container" class="habit" :class="{ done: isDone }">
     <div class="habit-name">{{ habit.name }}</div>
     <div class="buttons-error-wrapper">
       <div class="buttons-wrapper">
