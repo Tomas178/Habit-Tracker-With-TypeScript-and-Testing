@@ -48,7 +48,13 @@ function handleAddHabit() {
       </select>
     </div>
 
-    <button type="button" :disabled="isFutureDate" id="add-habit" @click="handleAddHabit">
+    <button
+      type="button"
+      :disabled="isFutureDate"
+      id="add-habit"
+      @click="handleAddHabit"
+      aria-label="Create new habit"
+    >
       <i class="pi pi-plus" style="font-size: 0.65rem"></i>New habit
     </button>
 

@@ -18,7 +18,7 @@ onMounted(() => {
     <form @submit.prevent="habitData.addHabit(newHabitName)">
       <div id="add-form">
         <div class="form-header">
-          <button type="button" class="close-button" @click="cleanAddForm">
+          <button type="button" class="close-button" @click="cleanAddForm" aria-label="Close form">
             <i class="pi pi-times" style="font-size: 0.75rem"></i>
           </button>
         </div>
@@ -26,7 +26,11 @@ onMounted(() => {
           <div class="form-group">
             <div id="form-input-information">
               <label class="text-primary-light" for="habit-name">Habit:</label>
-              <div id="input-length" :class="[isValidLength ? '' : 'error-msg']">
+              <div
+                id="input-length"
+                :class="[isValidLength ? '' : 'error-msg']"
+                data-testid="habit-name-current-length"
+              >
                 Current Length: {{ currentLength }}
               </div>
             </div>
@@ -38,7 +42,7 @@ onMounted(() => {
               id="habit-name"
               ref="habitInput"
             />
-            <div v-if="error" class="error-msg">{{ error }}</div>
+            <div v-if="error" class="error-msg" data-testid="error-message">{{ error }}</div>
           </div>
         </div>
         <div class="form-actions">
