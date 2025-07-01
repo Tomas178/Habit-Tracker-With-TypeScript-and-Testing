@@ -5,8 +5,8 @@ import isDarkMode from '@/stores/darkMode';
 
 const { selectedYear, selectedMonth, isFutureDate } = useCurrentDate();
 
-const years: number[] = Array.from({ length: 11 }, (_, i) => 2020 + i);
-const months: string[] = [
+const YEARS: number[] = Array.from({ length: 11 }, (_, i) => 2020 + i);
+const MONTHS: string[] = [
   'January',
   'February',
   'March',
@@ -33,7 +33,7 @@ function handleAddHabit() {
     <div class="form-group">
       <label for="year-select">Year:</label>
       <select id="year-select" v-model="selectedYear">
-        <option v-for="year in years" :key="year" :value="year">
+        <option v-for="year in YEARS" :key="year" :value="year">
           {{ year }}
         </option>
       </select>
@@ -42,7 +42,7 @@ function handleAddHabit() {
     <div class="form-group">
       <label for="month-select">Month:</label>
       <select id="month-select" v-model="selectedMonth">
-        <option v-for="(month, index) in months" :key="month" :value="index">
+        <option v-for="(month, index) in MONTHS" :key="month" :value="index">
           {{ month }}
         </option>
       </select>

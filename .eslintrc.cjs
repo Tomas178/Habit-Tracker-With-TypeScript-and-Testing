@@ -35,4 +35,13 @@ module.exports = {
       },
     },
   },
+  overrides: [
+    {
+      files: ['e2e/**/*.ts'],
+      rules: {
+        'no-await-in-loop': 'off',
+        'no-restricted-syntax': 'off',
+      },
+    },
+  ],
 };

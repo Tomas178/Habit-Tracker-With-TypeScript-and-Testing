@@ -28,6 +28,7 @@ function handleClick() {
     :class="{ active: isSameDay(selectedDate, parseISO(day.fullDate)), disabled }"
     :disabled="disabled"
     @click="handleClick"
+    aria-label="Select day"
   >
     <span>{{ day.nameDay }}</span>
     <span>{{ day.dateDay }}</span>

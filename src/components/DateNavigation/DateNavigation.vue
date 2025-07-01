@@ -43,7 +43,7 @@ function updateSelectedDay(dayNumber: number) {
 </script>
 
 <template>
-  <div id="date-wrapper">
+  <div id="date-wrapper" data-testid="date-buttons-wrapper">
     <DateButton
       v-for="day in daysInMonth"
       :key="day.fullDate"
