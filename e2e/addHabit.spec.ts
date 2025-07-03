@@ -56,7 +56,7 @@ test.describe('Add new habits', () => {
     await page.getByRole('button', { name: 'Create new habit' }).click();
     await checkIfOnlyAddFormActive(page);
     await page.getByLabel('Habit:').fill(HABITS[0]);
-    await page.getByRole('button', { name: 'Close form' }).click();
+    await page.getByRole('button', { name: 'Close button' }).click();
     await checkIfAddFormNotActive(page);
     await page.getByRole('button', { name: 'Create new habit' }).click();
     await expect(page.getByLabel('Habit:')).toHaveText('');
@@ -76,7 +76,7 @@ async function addSingleHabit(page: Page, habit: string) {
 }
 
 async function checkIfHabitIsAdded(page: Page, habit: string) {
-  await expect(page.getByTestId('habit-container').filter({ hasText: habit })).toBeVisible();
+  await expect(page.getByTestId(`habit-container-${habit}`)).toBeVisible();
 }
 
 async function checkIfOnlyAddFormActive(page: Page) {

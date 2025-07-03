@@ -41,8 +41,6 @@ const VALID_URLS: string[] = [
 
 test.beforeEach(async ({ page }) => {
   await page.goto('/');
-  await createDefaultHabits(page);
-  await checkHabitsLengthInLocalStorage(page, HABITS.length);
 });
 
 test.describe('Navigation through different dates', () => {
@@ -123,46 +121,6 @@ test.describe('Navigation through different dates', () => {
     await checkOnlyURLDay(page, firstDayOfMonth);
   });
 });
-
-// test('Date navigation flow', async ({ page }) => {
-//   const dateButtonsWrapper = page.getByTestId('date-buttons-wrapper');
-//   await expect(dateButtonsWrapper).toBeVisible();
-//   await expect(dateButtonsWrapper.filter({ has: page.getByLabel('Select day') })).toBeVisible();
-//   const habitList = page.getByTestId('habit-list');
-//   await expect(habitList).toBeHidden();
-
-//   await monthSelect.selectOption('May');
-//   await page.getByLabel('Select day').first().click();
-//   await expect(page).toHaveURL('/day/2025-05-01');
-
-//   await page.getByRole('link', { name: 'Habit Tracker' }).click();
-//   await expect(page).toHaveURL('/');
-
-//   await page.getByRole('button', { name: 'Create new habit' }).click();
-//   await page.getByLabel('Habit:').fill('Read a book');
-//   await page.getByRole('button', { name: 'Add habit' }).click();
-//   await expect(habitList).toBeVisible();
-//   await expect(habitList).not.toHaveClass('disabled');
-//   // check if the next day of dateOfToday is disabled.
-//   await monthSelect.selectOption(MONTHS[new Date().getMonth() + 1]);
-//   await expect(habitList).toBeVisible();
-//   await expect(habitList).toContainClass('disabled');
-// });
-
-async function createDefaultHabits(page: Page) {
-  for (const habit of HABITS) {
-    await page.getByRole('button', { name: 'Create new habit' }).click();
-    await page.getByLabel('Habit:').fill(habit);
-    await page.getByRole('button', { name: 'Add habit' }).click();
-  }
-}
-
-async function checkHabitsLengthInLocalStorage(page: Page, expected: number) {
-  return page.waitForFunction(
-    e => JSON.parse(localStorage.getItem('habits') || '[]')?.length === e,
-    expected,
-  );
-}
 
 async function changeYear(page: Page, year: string) {
   const yearSelect = page.getByLabel('Year:');

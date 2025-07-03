@@ -6,12 +6,18 @@ const emit = defineEmits(['unpause']);
 </script>
 
 <template>
-  <div class="habit">
+  <div :data-testid="`habit-container-${habit.name}`" class="habit">
     <div class="habit-name">{{ habit.name }}</div>
     <div class="button-wrapper">
-      <div class="unpause-button" @click="emit('unpause', habit.id)">
+      <button
+        type="button"
+        title="Unpause button"
+        aria-label="Unpause button"
+        class="unpause-button"
+        @click="emit('unpause', habit.id)"
+      >
         <i class="pi pi-play" style="font-size: 0.75rem"></i>
-      </div>
+      </button>
     </div>
   </div>
 </template>

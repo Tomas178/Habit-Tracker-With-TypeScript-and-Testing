@@ -22,7 +22,7 @@ function handleCancel() {
 
 <template>
   <div v-if="isActiveConfirmContainer" class="page-container">
-    <div class="form-wrapper">
+    <div data-testid="remove-habit-form" class="form-wrapper">
       <div v-if="habitToRemove" class="habit-info">
         <span
           >Habit to be removed:

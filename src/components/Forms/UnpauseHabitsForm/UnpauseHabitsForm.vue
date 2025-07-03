@@ -38,14 +38,20 @@ function handleUnpause(habitId: number) {
 
 <template>
   <div class="page-container">
-    <div id="unpause-form">
+    <div data-testid="paused-habits-modal" id="unpause-form">
       <div class="form-header">
         <div class="header-text">
           <span v-if="pausedHabits">Paused Habits:</span>
           <span v-else>No habits available to unpause for this date! </span>
         </div>
         <div class="button-wrapper">
-          <button type="button" class="close-button" @click="isActiveUnpauseHabitsForm = false">
+          <button
+            type="button"
+            title="Close button"
+            aria-label="Close Button"
+            class="close-button"
+            @click="isActiveUnpauseHabitsForm = false"
+          >
             <i class="pi pi-times" style="font-size: 0.75rem"></i>
           </button>
         </div>
@@ -78,7 +84,7 @@ function handleUnpause(habitId: number) {
     }
 
     .close-button {
-      @apply pl-2 font-bold text-primary-green;
+      @apply ml-2 font-bold text-primary-green;
     }
   }
 

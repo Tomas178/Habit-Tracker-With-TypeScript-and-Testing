@@ -118,7 +118,12 @@ function getPausedDate(habitId: number) {
 <template>
   <div>
     <div class="paused-habits-button">
-      <button type="button" :disabled="isFutureDate" @click="handlePauseHabitsButton">
+      <button
+        type="button"
+        aria-label="Paused Habits List"
+        :disabled="isFutureDate"
+        @click="handlePauseHabitsButton"
+      >
         <i class="pi pi-play"></i> Paused Habits List
       </button>
     </div>

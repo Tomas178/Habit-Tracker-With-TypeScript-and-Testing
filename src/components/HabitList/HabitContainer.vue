@@ -26,39 +26,53 @@ defineExpose({ showPauseError });
 </script>
 
 <template>
-  <div data-testid="habit-container" class="habit" :class="{ done: isDone }">
+  <div :data-testid="`habit-container-${habit.name}`" class="habit" :class="{ done: isDone }">
     <div class="habit-name">{{ habit.name }}</div>
     <div class="buttons-error-wrapper">
       <div class="buttons-wrapper">
-        <div
+        <button
+          type="button"
+          title="Edit button"
+          aria-label="Edit button"
+          data-testid="removeButton-{{ habit.name }}"
           class="habit-button edit-button"
           @click="emit('edit', habit.id, habit.name)"
           :class="{ disabled: isDisabled }"
         >
-          <span><i class="pi pi-pencil" style="font-size: 0.75rem"></i></span>
-        </div>
-        <div
+          <i class="pi pi-pencil" style="font-size: 0.75rem"></i>
+        </button>
+        <button
+          type="button"
+          title="Start stop button"
+          aria-label="Start stop button"
+          data-testid="removeButton-{{ habit.name }}"
           class="habit-button start-stop-button"
           @click="emit('stop', habit.id)"
           :class="{ disabled: isDisabled }"
         >
-          <span><i class="pi pi-pause" style="font-size: 0.75rem"></i></span>
-        </div>
-        <div
+          <i class="pi pi-pause" style="font-size: 0.75rem"></i>
+        </button>
+        <button
+          type="button"
+          title="Toggle button"
+          aria-label="Toggle button"
           class="habit-button toggle-button"
           @click="emit('toggle-done', habit.id)"
           :class="{ disabled: isDisabled }"
         >
-          <span v-if="isDone"><i class="pi pi-times" style="font-size: 0.75rem"></i></span>
-          <span v-else><i class="pi pi-check" style="font-size: 0.75rem"></i></span>
-        </div>
-        <div
+          <i class="pi pi-times" style="font-size: 0.75rem" v-if="isDone"></i>
+          <i class="pi pi-check" style="font-size: 0.75rem" v-else></i>
+        </button>
+        <button
+          type="button"
+          title="Remove button"
+          aria-label="Remove button"
           class="habit-button remove-button"
           @click="emit('remove', habit.id, habit.name)"
           :class="{ disabled: isDisabled }"
         >
-          <span><i class="pi pi-ban" style="font-size: 0.75rem"></i></span>
-        </div>
+          <i class="pi pi-ban" style="font-size: 0.75rem"></i>
+        </button>
       </div>
       <div v-if="pauseError" class="pause-error">Currently paused!</div>
       <div v-if="pauseError" class="paused-info">Since: {{ pausedDate }}</div>

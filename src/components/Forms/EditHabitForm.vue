@@ -26,7 +26,7 @@ function submitEdit() {
 <template>
   <div v-if="isActiveEditForm" class="page-container">
     <form @submit.prevent="submitEdit">
-      <div id="edit-form">
+      <div data-testid="edit-habit-form" id="edit-form">
         <div class="form-header">
           <button type="button" class="close-button" @click="cleanEditForm">
             <i class="pi pi-times" style="font-size: 0.75rem"></i>
