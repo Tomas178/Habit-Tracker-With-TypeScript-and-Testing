@@ -38,6 +38,7 @@ defineExpose({ showPauseError });
           class="habit-button edit-button"
           @click="emit('edit', habit.id, habit.name)"
           :class="{ disabled: isDisabled }"
+          :disabled="isDisabled"
         >
           <i class="pi pi-pencil" style="font-size: 0.75rem"></i>
         </button>
@@ -49,6 +50,7 @@ defineExpose({ showPauseError });
           class="habit-button start-stop-button"
           @click="emit('stop', habit.id)"
           :class="{ disabled: isDisabled }"
+          :disabled="isDisabled"
         >
           <i class="pi pi-pause" style="font-size: 0.75rem"></i>
         </button>
@@ -59,6 +61,7 @@ defineExpose({ showPauseError });
           class="habit-button toggle-button"
           @click="emit('toggle-done', habit.id)"
           :class="{ disabled: isDisabled }"
+          :disabled="isDisabled"
         >
           <i class="pi pi-times" style="font-size: 0.75rem" v-if="isDone"></i>
           <i class="pi pi-check" style="font-size: 0.75rem" v-else></i>
@@ -70,6 +73,7 @@ defineExpose({ showPauseError });
           class="habit-button remove-button"
           @click="emit('remove', habit.id, habit.name)"
           :class="{ disabled: isDisabled }"
+          :disabled="isDisabled"
         >
           <i class="pi pi-ban" style="font-size: 0.75rem"></i>
         </button>

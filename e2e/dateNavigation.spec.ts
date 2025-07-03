@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import type { Page } from '@playwright/test';
+import { format } from 'date-fns';
 
 const HABITS: string[] = ['Run a mile', 'Go to gym', 'Learn a skill'];
 const MONTHS: string[] = [
@@ -120,7 +121,47 @@ test.describe('Navigation through different dates', () => {
     await checkDaySelector(page, firstDayOfMonth);
     await checkOnlyURLDay(page, firstDayOfMonth);
   });
+
+  test('Navigating to future date should display disabled buttons and habits', async ({ page }) => {
+    await createDefaultHabits(page);
+    await checkHabitsLengthInLocalStorage(page, HABITS.length);
+
+    const today = new Date();
+    const tommorow = new Date(today);
+    tommorow.setDate(tommorow.getDate() + 1);
+    const zeroBasedDay = tommorow.getDate() - 1;
+    await changeFullDateThroughURL(page, format(tommorow, 'yyyy-MM-dd'));
+    await expect(page.getByLabel('Select day').nth(zeroBasedDay)).toContainClass('active');
+    await checkIfDayViewIsDisabled(page);
+
+    const nextYear = (today.getFullYear() + 1).toString();
+    await changeYear(page, nextYear);
+    await checkOnlyURLYear(page, nextYear);
+    await checkYearSelector(page, nextYear);
+    await checkIfDayViewIsDisabled(page);
+
+    const nextMonth: number = (today.getMonth() + 1) % 12;
+    await changeMonth(page, nextMonth);
+    await checkOnlyURLMonth(page, nextMonth);
+    await checkMonthSelector(page, nextMonth);
+    await checkIfDayViewIsDisabled(page);
+  });
 });
+
+async function createDefaultHabits(page: Page) {
+  for (const habit of HABITS) {
+    await page.getByRole('button', { name: 'Create new habit' }).click();
+    await page.getByLabel('Habit:').fill(habit);
+    await page.getByRole('button', { name: 'Add habit' }).click();
+  }
+}
+
+async function checkHabitsLengthInLocalStorage(page: Page, expected: number) {
+  return page.waitForFunction(
+    e => JSON.parse(localStorage.getItem('habits') || '[]')?.length === e,
+    expected,
+  );
+}
 
 async function changeYear(page: Page, year: string) {
   const yearSelect = page.getByLabel('Year:');
@@ -166,8 +207,8 @@ async function changeDay(page: Page, day: number) {
 }
 
 async function checkDaySelector(page: Page, day: number) {
-  const zerobasedDay = day - 1;
-  await expect(page.getByLabel('Select day').nth(zerobasedDay)).toContainClass('active');
+  const zeroBasedDay = day - 1;
+  await expect(page.getByLabel('Select day').nth(zeroBasedDay)).toContainClass('active');
 }
 
 async function checkOnlyURLDay(page: Page, day: number) {
@@ -183,4 +224,32 @@ async function goToInvalidURL(page: Page, url: string) {
 async function goToValidURL(page: Page, url: string) {
   await page.goto(url);
   await expect(page).toHaveURL(url);
+}
+
+async function changeFullDateThroughURL(page: Page, date: string) {
+  await page.goto(`/day/${date}`);
+  await expect(page).toHaveURL(`/day/${date}`);
+}
+
+async function checkIfDayViewIsDisabled(page: Page) {
+  for (const habit of HABITS) {
+    await checkIfAllHabitButtonsDisabled(page, habit);
+  }
+  await expect(page.getByRole('button', { name: 'Paused Habits List' })).toBeDisabled();
+  await expect(page.getByRole('button', { name: 'Create new habit' })).toBeDisabled();
+}
+
+async function checkIfAllHabitButtonsDisabled(page: Page, habit: string) {
+  await expect(
+    page.getByTestId(`habit-container-${habit}`).getByRole('button', { name: 'Edit button' }),
+  ).toBeDisabled();
+  await expect(
+    page.getByTestId(`habit-container-${habit}`).getByRole('button', { name: 'Start stop button' }),
+  ).toBeDisabled();
+  await expect(
+    page.getByTestId(`habit-container-${habit}`).getByRole('button', { name: 'Toggle button' }),
+  ).toBeDisabled();
+  await expect(
+    page.getByTestId(`habit-container-${habit}`).getByRole('button', { name: 'Remove button' }),
+  ).toBeDisabled();
 }

@@ -58,7 +58,13 @@ function handleAddHabit() {
       <i class="pi pi-plus" style="font-size: 0.65rem"></i>New habit
     </button>
 
-    <button id="toggle-mode-button" type="button" @click="isDarkMode = !isDarkMode">
+    <button
+      type="button"
+      title="Toggle theme"
+      aria-label="Toggle theme"
+      id="toggle-mode-button"
+      @click="isDarkMode = !isDarkMode"
+    >
       <i v-if="isDarkMode" class="pi pi-sun text-white"></i>
       <i v-else class="pi pi-moon"></i>
     </button>
