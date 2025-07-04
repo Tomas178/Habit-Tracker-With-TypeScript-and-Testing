@@ -1,5 +1,5 @@
 import type { ComponentPublicInstance } from 'vue';
 
-export type HabitContainerInstance = ComponentPublicInstance & {
+export interface HabitContainerInstance extends ComponentPublicInstance {
   showPauseError: () => void;
-};
+}

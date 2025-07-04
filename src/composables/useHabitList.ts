@@ -5,7 +5,7 @@ import type { HabitContainerInstance } from '@/models/HabitContainerInstance'; /
 function isHabitContainerInstance(
   obj: ComponentPublicInstance | Element | null,
 ): obj is HabitContainerInstance {
-  return !!obj && typeof (obj as any).showPauseError === 'function';
+  return !!obj && typeof (obj as HabitContainerInstance).showPauseError === 'function';
 }
 
 export default function useHabitList() {

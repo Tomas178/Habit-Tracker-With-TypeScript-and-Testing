@@ -14,11 +14,13 @@ const { selectedDate, isFutureDate } = useCurrentDate();
 
 const habitsRef = useHabitList();
 
-const activeDate = computed(() => format(selectedDate.value, 'yyyy-MM-dd'));
+const activeDate = computed<string>(() => format(selectedDate.value, 'yyyy-MM-dd'));
 
-const completedIds = computed(() => habitData.completedHabits.value[activeDate.value] || []);
+const completedIds = computed<number[]>(
+  () => habitData.completedHabits.value[activeDate.value] || [],
+);
 
-const filteredHabits = computed(() => {
+const filteredHabits = computed<Habit[]>(() => {
   const currentDate = activeDate.value;
 
   return habitData.habits.value.filter(habit => {
