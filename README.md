@@ -29,7 +29,17 @@ App is mainly focused for mobile users. Also responsive for tablets and laptops.
 
 ## Testing
 
-- Soon to be implemented
+### Unit tests
+
+- Tests for habit container
+- Tests for date button
+- Tests for all main functions of app
+
+### E2E tests
+
+- Tests adding habits
+- Tests for date navigations
+- Tests for edit/pausing/toggling/removing
 
 ## Starting with the project
 
