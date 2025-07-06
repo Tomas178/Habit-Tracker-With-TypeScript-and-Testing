@@ -15,6 +15,8 @@ const ERROR_NAME_EXISTS: string = 'Habit with this name already exists!';
 
 beforeEach(() => {
   habitData.habits.value = [];
+  habitData.completedHabits.value = {};
+  habitData.pausedHabits.value = {};
 });
 
 describe('Add habit', () => {
@@ -41,6 +43,86 @@ describe('Add habit', () => {
     habitData.addHabit(secondValidHabitName);
     expect(habitData.habits.value[1]).toMatchObject({ id: 2, name: secondValidHabitName });
     expect(habitData.habits.value).toHaveLength(2);
+  });
+});
+
+describe('Edit habit', () => {
+  it('Successfully edits a habit name', () => {
+    habitData.addHabit(validHabitName);
+    habitData.editHabit(1, secondValidHabitName);
+    expect(habitData.habits.value[0].name).toBe(secondValidHabitName);
+  });
+
+  it('Sets error when editing to empty name', () => {
+    habitData.addHabit(validHabitName);
+    habitData.editHabit(1, '');
+    expect(error.value).toBe(ERROR_EMPTY_NAME);
+  });
+
+  it('Sets error when editing to too long name', () => {
+    habitData.addHabit(validHabitName);
+    habitData.editHabit(1, 'a'.repeat(21));
+    expect(error.value).toBe(ERROR_TOO_LONG_NAME);
+  });
+
+  it('Sets error when editing to a duplicate name', () => {
+    habitData.addHabit(validHabitName);
+    habitData.addHabit(secondValidHabitName);
+    habitData.editHabit(2, validHabitName);
+    expect(error.value).toBe(ERROR_NAME_EXISTS);
+  });
+
+  it('Does nothing when editing a non-existent habit', () => {
+    habitData.addHabit(validHabitName);
+    habitData.editHabit(999, 'New name');
+    expect(habitData.habits.value).toHaveLength(1);
+    expect(habitData.habits.value[0].name).toBe(validHabitName);
+  });
+});
+
+describe('Unpause habit', () => {
+  it('Successfully unpauses a paused habit', () => {
+    const pauseDate = '2025-01-01';
+    const unpauseDate = '2025-02-01';
+    habitData.addHabit(validHabitName);
+    habitData.pauseHabit(1, pauseDate);
+    habitData.unpauseHabit(1, unpauseDate);
+
+    const pauses = habitData.pausedHabits.value[1];
+    expect(pauses[0].from).toBe(pauseDate);
+    expect(pauses[0].to).toBe(unpauseDate);
+  });
+
+  it('Does nothing when no active pause exists', () => {
+    const pauseDate = '2025-01-01';
+    const unpauseDate = '2025-02-01';
+    habitData.addHabit(validHabitName);
+    habitData.pauseHabit(1, pauseDate);
+    habitData.unpauseHabit(1, unpauseDate);
+    habitData.unpauseHabit(1, '2025-03-01');
+
+    const pauses = habitData.pausedHabits.value[1];
+    expect(pauses).toHaveLength(1);
+    expect(pauses[0].from).toBe(pauseDate);
+    expect(pauses[0].to).toBe(unpauseDate);
+  });
+
+  it('Does nothing when no pauses exist for the habit', () => {
+    habitData.addHabit(validHabitName);
+    habitData.unpauseHabit(1, '2025-01-01');
+    expect(habitData.pausedHabits.value[1]).toBeUndefined();
+  });
+});
+
+describe('nameExists', () => {
+  it('Returns true for existing habit name (case insensitive)', () => {
+    habitData.addHabit(validHabitName);
+    expect(habitData.nameExists(validHabitName)).toBe(true);
+    expect(habitData.nameExists(validHabitName.toUpperCase())).toBe(true);
+  });
+
+  it('Returns false for non-existing habit name', () => {
+    expect(habitData.nameExists(secondValidHabitName)).toBe(false);
   });
 });
 
