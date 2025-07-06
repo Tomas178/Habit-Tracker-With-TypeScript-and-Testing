@@ -10,7 +10,7 @@ const router = createRouter({
     {
       path: '/day/:date',
       name: 'DateRoute',
-      component: { template: '<div></div>' }, // dummy for test
+      component: { template: '<div></div>' },
     },
   ],
 });
