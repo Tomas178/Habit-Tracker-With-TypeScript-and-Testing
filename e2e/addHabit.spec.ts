@@ -42,23 +42,6 @@ test.describe('Add new habits', () => {
     await expect(page.getByTestId('habit-list')).toBeVisible();
   });
 
-  test('Should display errors on invalid habit names', async ({ page }) => {
-    await page.getByRole('button', { name: 'Create new habit' }).click();
-    await checkIfCurrentLengthReactive(page);
-    await addSingleHabit(page, 'a'.repeat(21));
-    await checkIfErrorMessageDisplayed(page, ERROR_TOO_LONG_NAME);
-
-    await addSingleHabit(page, '');
-    await checkIfErrorMessageDisplayed(page, ERROR_EMPTY_NAME);
-
-    await addSingleHabit(page, HABITS[0]);
-    await checkIfAddFormNotActive(page);
-    await page.getByRole('button', { name: 'Create new habit' }).click();
-    await checkIfOnlyAddFormActive(page);
-    await addSingleHabit(page, HABITS[0]);
-    await checkIfErrorMessageDisplayed(page, ERROR_NAME_EXISTS);
-  });
-
   test('Input value should be empty after closing Add form', async ({ page }) => {
     await page.getByRole('button', { name: 'Create new habit' }).click();
     await checkIfOnlyAddFormActive(page);
@@ -67,5 +50,34 @@ test.describe('Add new habits', () => {
     await checkIfAddFormNotActive(page);
     await page.getByRole('button', { name: 'Create new habit' }).click();
     await expect(page.getByLabel('Habit:')).toHaveText('');
+  });
+});
+
+test.describe('Form validation & reactiveness', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.getByRole('button', { name: 'Create new habit' }).click();
+  });
+
+  test('Check if current length text is reactive', async ({ page }) => {
+    await checkIfCurrentLengthReactive(page);
+  });
+
+  test('Should display an error on too long habit name', async ({ page }) => {
+    await addSingleHabit(page, 'a'.repeat(21));
+    await checkIfErrorMessageDisplayed(page, ERROR_TOO_LONG_NAME);
+  });
+
+  test('Should display an error on an empty habit name', async ({ page }) => {
+    await addSingleHabit(page, '');
+    await checkIfErrorMessageDisplayed(page, ERROR_EMPTY_NAME);
+  });
+
+  test('Should display an error on already existing habit name', async ({ page }) => {
+    await addSingleHabit(page, HABITS[0]);
+    await checkIfAddFormNotActive(page);
+    await page.getByRole('button', { name: 'Create new habit' }).click();
+    await checkIfOnlyAddFormActive(page);
+    await addSingleHabit(page, HABITS[0]);
+    await checkIfErrorMessageDisplayed(page, ERROR_NAME_EXISTS);
   });
 });
