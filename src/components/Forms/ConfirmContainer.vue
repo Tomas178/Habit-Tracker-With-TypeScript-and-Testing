@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import isActiveConfirmContainer from '@/stores/confirmContainer';
 import habitData from '@/stores/habitData';
-import type Habit from '@/models/Habit';
+import type { Habit } from '@/models/Habit';
 
 const habitToRemoveRaw = localStorage.getItem('HabitToRemove');
 const habitToRemove: Habit | null = habitToRemoveRaw ? JSON.parse(habitToRemoveRaw) : null;

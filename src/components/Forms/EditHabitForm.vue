@@ -3,7 +3,7 @@ import { ref, onMounted } from 'vue';
 import { isActiveEditForm, cleanEditForm } from '@/stores/editHabitForm';
 import habitData from '@/stores/habitData';
 import formState from '@/stores/formState';
-import type Habit from '@/models/Habit';
+import type { Habit } from '@/models/Habit';
 
 const { error, newHabitName, currentLength, isValidLength } = formState;
 

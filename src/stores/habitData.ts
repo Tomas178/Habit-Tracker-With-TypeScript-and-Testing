@@ -2,9 +2,7 @@ import { useLocalStorage } from '@vueuse/core';
 import formState from '@/stores/formState';
 import { cleanAddForm } from '@/stores/addHabitForm';
 import { cleanEditForm } from '@/stores/editHabitForm';
-import type Habit from '@/models/Habit';
-import type { CompletedHabits } from '@/models/CompletedHabit';
-import type { StoppedHabits } from '@/models/StoppedHabit';
+import type { Habit, CompletedHabits, StoppedHabits } from '@/models/Habit';
 
 const { error } = formState;
 

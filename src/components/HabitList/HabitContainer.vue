@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import type Habit from '@/models/Habit';
+import type { Habit } from '@/models/Habit';
 
 interface props {
   habit: Habit;

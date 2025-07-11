@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type Habit from '@/models/Habit';
+import type { Habit } from '@/models/Habit';
 
 const { habit } = defineProps<{ habit: Habit }>();
 const emit = defineEmits(['unpause']);

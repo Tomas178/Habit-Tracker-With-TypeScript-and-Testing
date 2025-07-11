@@ -8,7 +8,7 @@ import isActiveConfirmContainer from '@/stores/confirmContainer';
 import { isActiveEditForm } from '@/stores/editHabitForm';
 import isActiveUnpauseHabitsForm from '@/stores/unpauseHabitsForm';
 import useHabitList from '@/composables/useHabitList';
-import type Habit from '@/models/Habit';
+import type { Habit } from '@/models/Habit';
 
 const { selectedDate, isFutureDate } = useCurrentDate();
 
