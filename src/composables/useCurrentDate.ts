@@ -7,11 +7,7 @@ const selectedYear = ref(selectedDate.value.getFullYear());
 const selectedMonth = ref(selectedDate.value.getMonth());
 const selectedDay = ref(selectedDate.value.getDate());
 
-localStorage.setItem('DateOfToday', format(new Date(), 'yyyy-MM-dd'));
-
-const storedDate: string | null = localStorage.getItem('DateOfToday');
-
-const dateOfToday: Date | null = storedDate ? parseISO(storedDate) : null;
+const dateOfToday: Date = new Date();
 
 const isFutureDate = computed(() => {
   if (!dateOfToday) return false;
@@ -32,7 +28,7 @@ export default function useCurrentDate() {
       selectedDay.value = currentDay;
       selectedDate.value = new Date(currentYear, currentMonth, currentDay);
       await nextTick();
-      router.push('/');
+      await router.push('/');
     }
   }
 
@@ -42,14 +38,12 @@ export default function useCurrentDate() {
       if (Array.isArray(routeDate)) {
         [routeDate] = routeDate;
       }
-      if (typeof routeDate === 'string') {
-        const date = parseISO(routeDate);
-        if (!Number.isNaN(date.getTime())) {
-          selectedYear.value = date.getFullYear();
-          selectedMonth.value = date.getMonth();
-          selectedDay.value = date.getDate();
-          selectedDate.value = date;
-        }
+      const date = parseISO(routeDate);
+      if (!Number.isNaN(date.getTime())) {
+        selectedYear.value = date.getFullYear();
+        selectedMonth.value = date.getMonth();
+        selectedDay.value = date.getDate();
+        selectedDate.value = date;
       }
     }
   }
