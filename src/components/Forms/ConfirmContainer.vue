@@ -2,8 +2,9 @@
 import isActiveConfirmContainer from '@/stores/confirmContainer';
 import habitData from '@/stores/habitData';
 import type { Habit } from '@/models/Habit';
+import { HABIT_TO_REMOVE } from '@/helpers/constants';
 
-const habitToRemoveRaw = localStorage.getItem('HabitToRemove');
+const habitToRemoveRaw = localStorage.getItem(HABIT_TO_REMOVE);
 const habitToRemove: Habit | null = habitToRemoveRaw ? JSON.parse(habitToRemoveRaw) : null;
 
 function handleConfirm() {
@@ -11,12 +12,12 @@ function handleConfirm() {
 
   habitData.removeHabit(habitToRemove.id);
   isActiveConfirmContainer.value = false;
-  localStorage.removeItem('HabitToRemove');
+  localStorage.removeItem(HABIT_TO_REMOVE);
 }
 
 function handleCancel() {
   isActiveConfirmContainer.value = false;
-  localStorage.removeItem('HabitToRemove');
+  localStorage.removeItem(HABIT_TO_REMOVE);
 }
 </script>
 

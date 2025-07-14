@@ -1,6 +1,6 @@
 import { expect } from '@playwright/test';
 import type { Page } from '@playwright/test';
-import { HABITS } from './habitHelpers';
+import { HABITS_TO_ADD } from './habitHelpers';
 
 export const MONTHS: string[] = [
   'January',
@@ -108,7 +108,7 @@ export async function changeFullDateThroughURL(page: Page, date: string) {
 }
 
 export async function checkIfDayViewIsDisabled(page: Page) {
-  for (const habit of HABITS) {
+  for (const habit of HABITS_TO_ADD) {
     await checkIfAllHabitButtonsDisabled(page, habit);
   }
   await expect(page.getByRole('button', { name: 'Paused Habits List' })).toBeDisabled();

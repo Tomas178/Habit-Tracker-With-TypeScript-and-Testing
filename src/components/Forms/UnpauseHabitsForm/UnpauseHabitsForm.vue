@@ -5,6 +5,7 @@ import useCurrentDate from '@/composables/useCurrentDate';
 import isActiveUnpauseHabitsForm from '@/stores/unpauseHabitsForm';
 import habitData from '@/stores/habitData';
 import UnpauseHabitContainer from '@/components/Forms/UnpauseHabitsForm/UnpauseHabitContainer.vue';
+import { DATE_FORMAT } from '@/helpers/constants';
 
 const { selectedDate } = useCurrentDate();
 
@@ -32,7 +33,7 @@ const pausedHabitsList = computed(() => {
 const pausedHabits = computed(() => pausedHabitsList.value.length > 0);
 
 function handleUnpause(habitId: number) {
-  habitData.unpauseHabit(habitId, format(selectedDate.value, 'yyyy-MM-dd'));
+  habitData.unpauseHabit(habitId, format(selectedDate.value, DATE_FORMAT));
 }
 </script>
 

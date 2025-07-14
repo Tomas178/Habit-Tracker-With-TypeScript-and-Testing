@@ -4,10 +4,11 @@ import { isActiveEditForm, cleanEditForm } from '@/stores/editHabitForm';
 import habitData from '@/stores/habitData';
 import formState from '@/stores/formState';
 import type { Habit } from '@/models/Habit';
+import { HABIT_TO_EDIT } from '@/helpers/constants';
 
 const { error, newHabitName, currentLength, isValidLength } = formState;
 
-const habitToEditRaw = localStorage.getItem('HabitToEdit');
+const habitToEditRaw = localStorage.getItem(HABIT_TO_EDIT);
 const habitToEdit: Habit | null = habitToEditRaw ? JSON.parse(habitToEditRaw) : null;
 
 const habitInput = ref<HTMLInputElement | null>(null);

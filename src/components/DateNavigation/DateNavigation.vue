@@ -4,6 +4,7 @@ import { isAfter, parseISO, format } from 'date-fns';
 import useCurrentDate from '@/composables/useCurrentDate';
 import DateButton from '@/components/DateNavigation/DateButton.vue';
 import type DateForNavigation from '@/models/DateForNavigation';
+import { DATE_FORMAT } from '@/helpers/constants';
 
 const { selectedYear, selectedMonth, selectedDay } = useCurrentDate();
 
@@ -21,7 +22,7 @@ const daysInMonth = computed(() => {
   while (date.getMonth() === month) {
     const dateDay: number = date.getDate();
     const nameDay: string = daysOfWeek[date.getDay()];
-    const fullDate: string = format(date, 'yyyy-MM-dd');
+    const fullDate: string = format(date, DATE_FORMAT);
 
     days.push({ dateDay, nameDay, fullDate });
 

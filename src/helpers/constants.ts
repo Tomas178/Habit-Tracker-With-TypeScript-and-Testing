@@ -1,0 +1,9 @@
+export const DATE_FORMAT: string = 'yyyy-MM-dd';
+export const ERROR_TOO_LONG_NAME: string = 'Name too long! Maximum is 20!';
+export const ERROR_EMPTY_NAME: string = 'Habit name cannot be empty!';
+export const ERROR_NAME_EXISTS: string = 'Habit with this name already exists!';
+export const HABITS: string = 'habits';
+export const HABIT_TO_EDIT: string = 'HabitToEdit';
+export const HABIT_TO_REMOVE: string = 'HabitToRemove';
+export const PAUSED_HABITS: string = 'pausedHabits';
+export const COMPLETED_HABITS: string = 'completedHabits';

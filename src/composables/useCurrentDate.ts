@@ -1,6 +1,7 @@
 import { ref, watch, nextTick, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { parseISO, format, isAfter } from 'date-fns';
+import { DATE_FORMAT } from '@/helpers/constants';
 
 const selectedDate = ref(new Date());
 const selectedYear = ref(selectedDate.value.getFullYear());
@@ -62,7 +63,7 @@ export default function useCurrentDate() {
       const newDate = new Date(newYear, newMonth, newDay);
       selectedDate.value = newDate;
 
-      const formattedDate = format(newDate, 'yyyy-MM-dd');
+      const formattedDate = format(newDate, DATE_FORMAT);
 
       if (route.params.date !== formattedDate) {
         router.push(`/day/${formattedDate}`);

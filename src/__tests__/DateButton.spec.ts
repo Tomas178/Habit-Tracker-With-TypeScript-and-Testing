@@ -23,7 +23,7 @@ const someDate: DateForNavigation = {
 
 describe('DateButton', () => {
   it('Renders properly', async () => {
-    router.push({ name: 'DateRoute', params: { date: someDate.fullDate } });
+    await router.push({ name: 'DateRoute', params: { date: someDate.fullDate } });
     await router.isReady();
 
     const button = mount(DateButton, {

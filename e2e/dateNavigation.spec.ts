@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { format } from 'date-fns';
-import { HABITS, checkHabitsLengthInLocalStorage } from './utils/habitHelpers';
+import { HABITS_TO_ADD, checkHabitsLengthInLocalStorage } from './utils/habitHelpers';
 import { createDefaultHabits } from './utils/habitManipulationHelpers';
 import {
   INVALID_URLS,
@@ -104,7 +104,7 @@ test.describe('Navigation through different dates', () => {
 
   test('Navigating to future date should display disabled buttons and habits', async ({ page }) => {
     await createDefaultHabits(page);
-    await checkHabitsLengthInLocalStorage(page, HABITS.length);
+    await checkHabitsLengthInLocalStorage(page, HABITS_TO_ADD.length);
 
     const today = new Date();
     const tommorow = new Date(today);

@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import habitData from '@/stores/habitData';
 import formState from '@/stores/formState';
+import { ERROR_EMPTY_NAME, ERROR_NAME_EXISTS, ERROR_TOO_LONG_NAME } from '@/helpers/constants';
 
 const { error } = formState;
 
@@ -8,10 +9,6 @@ const emptyHabitName: string = '';
 const tooLongHabitName: string = 'a'.repeat(21);
 const validHabitName: string = 'Read a book';
 const secondValidHabitName: string = 'Learn a skill';
-
-const ERROR_TOO_LONG_NAME: string = 'Name too long! Maximum is 20!';
-const ERROR_EMPTY_NAME: string = 'Habit name cannot be empty!';
-const ERROR_NAME_EXISTS: string = 'Habit with this name already exists!';
 
 beforeEach(() => {
   habitData.habits.value = [];

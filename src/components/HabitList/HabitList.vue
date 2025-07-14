@@ -9,12 +9,13 @@ import { isActiveEditForm } from '@/stores/editHabitForm';
 import isActiveUnpauseHabitsForm from '@/stores/unpauseHabitsForm';
 import useHabitList from '@/composables/useHabitList';
 import type { Habit } from '@/models/Habit';
+import { DATE_FORMAT, HABIT_TO_EDIT, HABIT_TO_REMOVE } from '@/helpers/constants';
 
 const { selectedDate, isFutureDate } = useCurrentDate();
 
 const habitsRef = useHabitList();
 
-const activeDate = computed<string>(() => format(selectedDate.value, 'yyyy-MM-dd'));
+const activeDate = computed<string>(() => format(selectedDate.value, DATE_FORMAT));
 
 const completedIds = computed<number[]>(
   () => habitData.completedHabits.value[activeDate.value] || [],
@@ -91,7 +92,7 @@ function goToEditHabit(habitId: number, habitName: string) {
   if (isFutureDate.value) return;
 
   isActiveEditForm.value = true;
-  localStorage.setItem('HabitToEdit', JSON.stringify({ id: habitId, name: habitName }));
+  localStorage.setItem(HABIT_TO_EDIT, JSON.stringify({ id: habitId, name: habitName }));
 }
 
 function handleRemove(habitId: number, habitName: string) {
@@ -99,7 +100,7 @@ function handleRemove(habitId: number, habitName: string) {
 
   isActiveConfirmContainer.value = true;
   const habitToRemove: Habit = { id: habitId, name: habitName };
-  localStorage.setItem('HabitToRemove', JSON.stringify(habitToRemove));
+  localStorage.setItem(HABIT_TO_REMOVE, JSON.stringify(habitToRemove));
 }
 
 function handlePauseHabitsButton() {

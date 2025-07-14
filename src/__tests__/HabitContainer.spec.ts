@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { mount } from '@vue/test-utils';
 import HabitContainer from '@/components/HabitList/HabitContainer.vue';
-import type Habit from '@/models/Habit';
+import type { Habit } from '@/models/Habit';
 import type { HabitContainerInstance } from '@/models/HabitContainerInstance';
 
 const habit: Habit = {

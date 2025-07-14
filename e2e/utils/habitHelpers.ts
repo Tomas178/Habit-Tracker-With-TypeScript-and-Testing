@@ -1,10 +1,6 @@
 import { expect } from '@playwright/test';
 import type { Page } from '@playwright/test';
-
-export const ERROR_TOO_LONG_NAME = 'Name too long! Maximum is 20!';
-export const ERROR_EMPTY_NAME = 'Habit name cannot be empty!';
-export const ERROR_NAME_EXISTS = 'Habit with this name already exists!';
-export const HABITS: string[] = ['Run a mile', 'Go to gym', 'Learn a skill'];
+export const HABITS_TO_ADD: string[] = ['Run a mile', 'Go to gym', 'Learn a skill'];
 
 export async function checkHabitsLengthInLocalStorage(page: Page, expected: number) {
   return page.waitForFunction(

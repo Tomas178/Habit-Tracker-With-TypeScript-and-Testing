@@ -3,13 +3,21 @@ import formState from '@/stores/formState';
 import { cleanAddForm } from '@/stores/addHabitForm';
 import { cleanEditForm } from '@/stores/editHabitForm';
 import type { Habit, CompletedHabits, StoppedHabits } from '@/models/Habit';
+import {
+  COMPLETED_HABITS,
+  ERROR_EMPTY_NAME,
+  ERROR_NAME_EXISTS,
+  ERROR_TOO_LONG_NAME,
+  HABITS,
+  PAUSED_HABITS,
+} from '@/helpers/constants';
 
 const { error } = formState;
 
-const habits = useLocalStorage<Habit[]>('habits', []);
+const habits = useLocalStorage<Habit[]>(HABITS, []);
 
-const completedHabits = useLocalStorage<CompletedHabits>('completedHabits', {});
-const pausedHabits = useLocalStorage<StoppedHabits>('pausedHabits', {});
+const completedHabits = useLocalStorage<CompletedHabits>(COMPLETED_HABITS, {});
+const pausedHabits = useLocalStorage<StoppedHabits>(PAUSED_HABITS, {});
 
 function addHabit(name: string) {
   if (isValidHabitName(name)) {
@@ -69,17 +77,17 @@ function nameExists(newHabitName: string) {
 
 function isValidHabitName(name: string) {
   if (name.length > 20) {
-    error.value = `Name too long! Maximum is 20!`;
+    error.value = ERROR_TOO_LONG_NAME;
     return false;
   }
 
   if (name === '') {
-    error.value = 'Habit name cannot be empty!';
+    error.value = ERROR_EMPTY_NAME;
     return false;
   }
 
   if (nameExists(name)) {
-    error.value = 'Habit with this name already exists!';
+    error.value = ERROR_NAME_EXISTS;
     return false;
   }
 
