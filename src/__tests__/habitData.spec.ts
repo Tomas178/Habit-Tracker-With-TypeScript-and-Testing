@@ -16,7 +16,7 @@ beforeEach(() => {
   habitData.pausedHabits.value = {};
 });
 
-describe('Add habit', () => {
+describe('addHabit', () => {
   it('Sets an error when empty habit name is given', () => {
     habitData.addHabit(emptyHabitName);
     expect(error.value).toBe(ERROR_EMPTY_NAME);

@@ -24,10 +24,12 @@ export default function useCurrentDate() {
       const currentYear = dateOfToday.getFullYear();
       const currentMonth = dateOfToday.getMonth();
       const currentDay = dateOfToday.getDate();
+
       selectedYear.value = currentYear;
       selectedMonth.value = currentMonth;
       selectedDay.value = currentDay;
       selectedDate.value = new Date(currentYear, currentMonth, currentDay);
+
       await nextTick();
       await router.push('/');
     }
